@@ -33,6 +33,7 @@
     4. [Альтернативный синтаксис](#Альтернативный-синтаксис)
     5. [Тернарный оператор](#Тернарный-оператор)
     6. [switch](#switch)
+    7. [try..catch](#trycatch)
 11. [Массивы](#Массивы)
     1. [Нумерованный массив](#Нумерованный-массив)
     2. [Ассоциативный массив](#Ассоциативный-массив)
@@ -707,6 +708,38 @@ switch ($letter):
 	case "M": $size *= 1024; // -> 8 388 608
 	case "K": $size *= 1024; // -> 8 192
 endswitch;
+?>
+```
+
+### try..catch..
+
+Конструкция `try..catch..` используется для обработки исключений и  отслеживания ошибок. Ошибку (в случае возникновения) перехватывает `catch`, информацию об ошибке можно извлечь из класса `Exception`.
+
+```php
+<?php
+class User {
+  public $name, $last_name, $age, $sex;
+  function __construct($name='', $last_name='', $age=0, $sex='') {
+    try {
+      if($name == '' or $last_name == '' or $age == 0 or $sex == '')
+        throw new Exception('Введены не все данные!');
+      $this->name = $name;
+      $this->last_name = $last_name;
+      $this->age = $age;
+      $this->sex = $sex;
+    }
+    catch(Exception $error) {
+      // Сообщение об ошибке
+      echo $error->getMessage(); // -> "Введены не все данные!"
+      // Строка на которой произошла ошибка
+      echo $error->getLine();
+      // Файл, в котором произошла ошибка
+      echo $error->getFile();
+    }
+  }
+}
+
+$user = new User(); // $Error object
 ?>
 ```
 
