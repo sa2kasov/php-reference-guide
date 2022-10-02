@@ -65,6 +65,7 @@
     4. [Клонирование объектов](#Клонирование-объектов)
     5. [Наследование](#Наследование)
     6. [Перегрузка методов](#Перегрузка-методов)
+    7. [Перебор свойств объекта](#Перебор-свойств-объекта)
 
 
 ## Предыстория
@@ -713,15 +714,16 @@ endswitch;
 
 ### try..catch..
 
-Конструкция `try..catch..` используется для обработки исключений и  отслеживания ошибок. Ошибку (в случае возникновения) перехватывает `catch`, информацию об ошибке можно извлечь из класса `Exception`.
+Конструкция `try..catch..` используется для обработки исключений и  отслеживания ошибок. Ошибку в случае возникновения перехватывает `catch`, информацию об ошибке можно извлечь из класса `Exception`.
 
 ```php
 <?php
 class User {
   public $name, $last_name, $age, $sex;
-  function __construct($name='', $last_name='', $age=0, $sex='') {
+
+  function __construct($name = '', $lastName = '', $age = 0, $sex = '') {
     try {
-      if($name == '' or $last_name == '' or $age == 0 or $sex == '')
+      if($name == '' or $lastName == '' or $age == 0 or $sex == '')
         throw new Exception('Введены не все данные!');
       $this->name = $name;
       $this->last_name = $last_name;
@@ -739,7 +741,7 @@ class User {
   }
 }
 
-$user = new User(); // $Error object
+$user = new User(); // $error object
 ?>
 ```
 
@@ -1676,3 +1678,28 @@ $book2 = new Book(
 );
 ?>
 ```
+
+### Перебор свойств объекта
+
+Перебор свойств объекта PHP осуществляется с помощью цикла `foreach`. Для большего контроля над данными можно использовать его расширенную версию с извлечением ключей, где будут храниться имена свойств объекта.  
+
+```php
+<?php
+class Student {
+  public $name, $course, $faculty;
+
+  function __construct($name, $course, $faculty) {
+    $this->name = $name;
+    $this->course = $course;
+    $this->faculty = $faculty;
+  }
+}
+
+$student = new student('John Doe', 3, 'PHP Programming');
+
+foreach($student_1 as $name => $value) {
+  print "<p>$name: $value</p>";
+}
+?>
+```
+
