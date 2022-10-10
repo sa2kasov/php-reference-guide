@@ -72,6 +72,7 @@
     11. [Финальные классы и методы](#Финальные-классы-и-методы)
     12. [Статические свойства и методы](#Статические-свойства-и-методы)
     13. [Ключевое слово instanceof](#Ключевое-слово-instanceof)
+    14. [Автоматическая загрузка классов](#Автоматическая-загрузка-классов)
 
 
 ## Предыстория
@@ -1876,14 +1877,14 @@ echo staticClass::$book_count; // -> 2
 
 ```php
 <?php
-class User{}
+class User {}
 
-class SuperUser extends User{}
+class SuperUser extends User {}
 
 function checkObject($object) {
   // Принадлежит ли переданный объект классу
-  if($object instanceOf User) {
-    if($object instanceof SuperUser)
+  if ($object instanceOf User) {
+    if ($object instanceof SuperUser)
       return 'Данный пользователь обычный пользователь';
     else
       return 'Данный пользователь обладает правами администратора';
@@ -1891,6 +1892,32 @@ function checkObject($object) {
   else
     return 'Неизвестный пользователь';
 }
+?>
+```
+
+### Автоматическая загрузка классов
+
+Если PHP не может найти класс, то он прежде чем выдать ошибку сначала ищет функцию `__autoload()` передавая имя искомого класса. Если функция описана, то она будет вызвана перед ошибкой.
+
+```php
+<?php
+function __autoload($class) {
+  print("Класс $class не описан");
+}
+
+$car1 = new car();
+?>
+```
+
+Основное назначение функции `__autoload` подгружать файл где описан не найденный в текущем файле класс. Для этого необходимо создать файл с таким же названием, как и имя искомого класса.
+
+```php
+<?php
+function __autoload($class) {
+  // Файл где описан класс
+  include "$class.class.php";
+}
+$car1 = new car();
 ?>
 ```
 
