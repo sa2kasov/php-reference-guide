@@ -1,8 +1,8 @@
-<p align="center">
+<p style="text-align: center">
     <img
-      alt="Node.js Logo"
-      src="https://www.php.net/images/logos/php-logo.svg"
+      src="https://www.php.net/images/logos/new-php-logo.svg"
       width="400"
+      alt="PHP Logo"
     />
 </p>
 
