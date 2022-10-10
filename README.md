@@ -1,3 +1,11 @@
+<p align="center">
+    <img
+      alt="Node.js Logo"
+      src="https://www.php.net/images/logos/php-logo.svg"
+      width="400"
+    />
+</p>
+
 # Справочное руководство по PHP
 
 ### Содержание
