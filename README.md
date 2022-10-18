@@ -88,7 +88,7 @@
     1. [Создание Cookie](#Создание-Cookie)
     2. [Чтение Cookie](#Чтение-Cookie)
     3. [Удаление Cookie](#Удаление-Cookie)
-17. [HTTP-заголовки](HTTP-заголовки)
+17. [HTTP-заголовки](#HTTP-заголовки)
 
 
 ## Предыстория
@@ -2211,6 +2211,41 @@ header("Refresh: 3; url=https://x.com");
 <?php
 // Передаваемый файл обрабатывать как text/xml с кодировкой utf-8
 header("Content-type: text/xml; charset=utf-8");
+?>
+```
+
+**Управление кэшированием и актуальностью веб-страницы**
+
+Браузер может закэшировать страницу, но перед очередным запросом должен проверить - не обновлялась ли страница, если нет, то кэш используется.
+
+
+```php
+<?php
+// Повторить запро с сервера-источника
+header('Cache-Control: no-cache');
+
+// Явный запрет на кэширование
+header('Cache-Control: no-store');
+
+// Заголовок Expires говорит об актуальности этой страницы 
+header('Expires: ' . date('r'));
+
+// Последнее изменение страницы
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+
+// Разрешение
+header('Cache-Control: public');
+
+// Страница будет актуальна один час
+header('Expires: ' . date('r', time() + 3600));
+?>
+```
+
+_Cookie_ можно послать с помощью функции `header()`, как HTTP-заголовок.
+
+```php
+<?php
+header('Set-Cookie: name=Hello; expires=Wed, 18 Oct 23 15:00:00 GMT');
 ?>
 ```
 
