@@ -104,6 +104,8 @@
     11. [Разбор файлов на сервере](#Разбор-файлов-на-сервере)
 20. [Работа с почтой](#Работа-с-почтой)
 21. [Базы данных и SQL](#Базы-данных-и-SQL)
+    1. [Введение в SQL](#Введение-в-SQL)
+    2. [Примеры SQL-запросов](#Примеры-SQL-запросов)
 
 
 ## Предыстория
@@ -2715,4 +2717,62 @@ _SQL (Structured Query Language — Язык структурированных 
  
 - _DQL (Data Query Lanquage – Язык запросов)_:
   - SELECT (выбрать).
+
+### Примеры SQL-запросов
+
+**Запросы SELECT**
+
+_выборка с сортировкой_
+
+```sql
+SELECT name, addr, city -- Перечисление полей
+FROM teachers -- Из какой таблицы
+ORDER BY name -- Сортировать по полю name
+```
+
+_с определенным условием_
+
+```sql
+SELECT title
+FROM courser
+WHERE length > 30
+```
+
+_совпадение в строковых значениях_
+
+```sql
+SELECT *
+FROM courses
+WHERE length > 30 -- длина больше 30
+AND title LIKE 'Web%' -- значение поля title должно начинаться с Web
+```
+
+_объединение 2-ух таблиц_
+
+```sql
+SELECT t.lname, t.fname, l.course -- Выборка полей из конкретных таблиц
+FROM teachers t, lessons l -- Назначение таблице teachers алиас t
+INNER JOIN lessons l ON t.id = l.teacher_id -- Внутреннее объединение
+```
+
+_левое внешнее соединение_
+
+Если записям в левой таблице не найдутся соответствия, то они выводятся в конце со значением NULL.
+
+```sql
+SELECT t.lname, t.fname, l.course
+FROM teachers t, lessons l
+LEFT OUTER JOIN lessons l ON t.id = l.teacher_id
+```
+
+_объединение 3-ёх таблиц_
+
+```sql
+SELECT DISTINCT teachers.name
+FROM teachers INNER JOIN 
+(lessons INNER JOIN courses ON lessons.course = courses.id)
+ON teachers.id = lessons.teachers
+WHERE courses.title LIKE 'Web%'
+ORDER BY teachers.name
+```
 
