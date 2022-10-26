@@ -2776,3 +2776,48 @@ WHERE courses.title LIKE 'Web%'
 ORDER BY teachers.name
 ```
 
+**Запросы INSERT**
+
+В таблицу `courses` добавить значения в каждое поле.
+
+```sql
+INSERT INTO courses
+  VALUES (Null, 'Java2', '...', 40) -- Добавляемые значения
+```
+
+Добавление только в конкретные поля.
+
+```sql
+INSERT INTO courses (title, length)
+  VALUES ('Java', 40) -- Добавляемые значения
+```
+
+**Запрос DELETE**
+
+```sql
+DELETE FROM lessons -- Из какой таблицы
+WHERE lessons.date = '2013-05-17' -- Условие удаления
+```
+
+    Важно! Если не передать условие, то удалятся все записи.
+
+**Запросы UPDATE**
+
+```sql
+UPDATE teachers -- В какой таблице
+SET -- Установить обновление
+zarplata = zarplata * 2,
+premia = premia * 10
+WHERE name LIKE 'Иванов%'
+  OR name LIKE 'Петров%'
+  OR name LIKE 'Сидоров%'
+```
+
+```sql
+UPDATE teachers
+SET
+zarplata = zarplata * 2,
+premia = premia * 10
+WHERE name IN ('Иванов', 'Петров', 'Сидоров')
+```
+
